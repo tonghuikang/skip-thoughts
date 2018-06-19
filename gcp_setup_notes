@@ -59,6 +59,7 @@ https://github.com/facebookresearch/SentEval/files/1937796/msr_paraphrase_train.
 
 
 In the end I still don't know how to use GPU :(
+Anyway what I learnt is that the ```vectors = encoder.encode(X)``` is a bad prediction for semantic similarity. (I don't think it is meant for it?)
 
 Interesting:
 https://github.com/facebookresearch/SentEval
