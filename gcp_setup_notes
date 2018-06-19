@@ -1,0 +1,3 @@
+https://github.com/tonghuikang/setup-cheatsheets/blob/master/gcp/fastai_basic.sh
+
+pip2 install theano==0.7 torch skipthoughts scikit-learn keras nltk gensim --user
