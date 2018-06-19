@@ -1,3 +1,65 @@
-https://github.com/tonghuikang/setup-cheatsheets/blob/master/gcp/fastai_basic.sh
+No more sudo pip2 install package,  because need to ```sudo -i``` to start jupyter notebook. I am addicted to jupyter notebook because I want to see the result being saved. This will screw things up later.
 
-pip2 install theano==0.7 torch skipthoughts scikit-learn keras nltk gensim --user
+Using wrapper install instead, based on fastai setup script. For GPU setup I referred to Timothy's GPU script. I don't have one prepared yet to do both.
+
+
+ISSUE - GPU driver is new, device=cuda wasn’t installed at that time. But new drivers cannot utilise device=gpu0 properly. Therefore http://deeplearning.net/software/libgpuarray/installation.html 
+
+
+Couldn’t condo install (thanks Tim), therefore need to build from sources :(
+
+
+```sudo apt install cmake
+pip2 install Cython --user
+pip2 install nose --user
+pip2 install mkl --user
+
+
+git clone https://github.com/Theano/libgpuarray.git
+cd libgpuarray
+
+
+rm -rf ~/.local/lib/libgpuarray* ~/.local/include/gpuarray
+rm -rf build Build
+mkdir Build
+cd Build
+cmake .. -DCMAKE_INSTALL_PREFIX=~/.local -DCMAKE_BUILD_TYPE=Release
+make
+make install
+DEVICE="cuda" make test
+
+cd ..
+
+# Run the following export and add them in your ~/.bashrc file
+export CPATH=$CPATH:~/.local/include
+export LIBRARY_PATH=$LIBRARY_PATH:~/.local/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.local/lib
+
+python2 setup.py build
+python2 setup.py install --user
+cd
+DEVICE="cuda" python2 -c "import pygpu;pygpu.test()"```
+
+
+Ran 7301 tests in 126.754s
+FAILED (SKIP=7, errors=4)
+
+
+
+The tensorflow part - I didn't install tensorflow properly. OMG I still haven't get this sorted out.
+
+
+
+https://www.microsoft.com/en-us/download/details.aspx?id=52398
+# Screw that install from here directly
+https://github.com/facebookresearch/SentEval/files/1937795/msr_paraphrase_test.txt
+https://github.com/facebookresearch/SentEval/files/1937796/msr_paraphrase_train.txt
+
+
+
+
+In the end I still don't know how to use GPU :(
+
+Interesting:
+https://github.com/facebookresearch/SentEval
+https://github.com/airalcorn2/Deep-Semantic-Similarity-Model/blob/master/deep_semantic_similarity_keras.py
